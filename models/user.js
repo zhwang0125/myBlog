@@ -6,11 +6,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-    username: String,                               // 用户名
-    password: String,                               // 密码
+    userName: String,                               // 用户名
+    passWord: String,                               // 密码
     email: String,                                  // 邮箱
     avatar: String,                                 // 头像
     create_at: {type: Date, default: Date.now()}    // 创建时间
 });
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('users', userSchema);

@@ -1,11 +1,17 @@
+/**
+ * 主页controllers层
+ * @date 2016/05/23
+ */
+
 var articleDao = require('../proxy/article');
 
 var homeContr = {};
 
 /**
- * 博客主页
- * @param req
- * @param res
+ * 主页路由入口
+ *
+ * @date 2016/05/23
+ * @query page  第几页
  */
 homeContr.index = function (req, res, next) {
     var page = req.query.page || 1;
