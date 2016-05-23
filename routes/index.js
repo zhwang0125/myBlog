@@ -1,13 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+var homeContr = require('../controllers/home');
+
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    var obj = 'aaa'
-
-    console.log(typeof obj);
-
-    res.render('index', {title: 'Express'});
-});
+router.get('/', homeContr.index);
 
 module.exports = router;

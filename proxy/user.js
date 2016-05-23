@@ -34,3 +34,5 @@ userDao.findByUserName = function (username, fn) {
 
     userModel.findOne({username: username}, fn);
 };
+
+module.exports = userDao;
