@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var articleSchema = new Schema({
-    name: String,                               // 名称
+    userName: String,                               // 名称
     avatar: String,                             // 头像
     title: String,                              // 标题
     tags: Array,                                // 标签
@@ -16,4 +16,4 @@ var articleSchema = new Schema({
     create_at: {type: Date, default: Date.now()}
 });
 
-module.exports = mongoose.model('user', articleSchema);
+module.exports = mongoose.model('article', articleSchema);

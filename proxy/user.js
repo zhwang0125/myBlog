@@ -32,7 +32,7 @@ userDao.findByUserName = function (username, fn) {
         return fn(new Error('username not is string'), null);
     }
 
-    userModel.findOne({username: username}, fn);
+    userModel.findOne({userName: username}, fn);
 };
 
 module.exports = userDao;

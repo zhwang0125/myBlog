@@ -56,4 +56,65 @@ userContr.registerPost = function (req, res, next) {
     });
 };
 
+/**
+ * 跳转登录页面
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
+userContr.loginGet = function (req, res, next) {
+    res.render('login', {
+        title: '登录',
+        user: req.session.user,
+        errMsg: null
+    });
+};
+
+/**
+ * 登录
+ *
+ * @body userName   用户名
+ * @body passWord   密码
+ */
+userContr.loginPost = function (req, res, next) {
+    var userName = req.body.userName || '';
+    var passWord = req.body.passWord || '';
+
+    if (!userName || !passWord) {
+        return res.render('login', {
+            title: '登录',
+            user: req.session.user,
+            errMsg: '请输入用户名或密码'
+        });
+    }
+
+    userDao.findByUserName(userName, function (err, user) {
+        if (err) {
+            return next(err);
+        }
+
+        passWord = md5.update(passWord).digest('hex');
+
+        if (user === null) {
+            return res.render('login', {
+                title: '登录',
+                user: req.session.user,
+                errMsg: '用户不存在'
+            });
+        }
+
+        if (user.passWord !== passWord) {
+            return res.render('login', {
+                title: '登录',
+                user: req.session.user,
+                errMsg: '用户名或密码错误'
+            });
+        }
+
+        req.session.user = user;
+        res.redirect('/')
+    });
+};
+
 module.exports = userContr;

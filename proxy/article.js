@@ -50,4 +50,18 @@ articleDao.findList = function (conditions, page, fn) {
     });
 };
 
+/**
+ * 保存文章
+ *
+ * @param article   文章
+ * @param fn        回调
+ */
+articleDao.create = function (article, fn) {
+    if (typeof article !== 'object') {
+        return fn(new Error('article not is object'), null);
+    }
+
+    articleModel.create(article, fn);
+};
+
 module.exports = articleDao;

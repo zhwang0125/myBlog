@@ -21,9 +21,23 @@ homeContr.index = function (req, res, next) {
             return next(err);
         }
 
+        // 格式化时间
+        result.forEach(function (item) {
+            var date = item.create_at;
+            item.time = {
+                date: date,
+                year : date.getFullYear(),
+                month : date.getFullYear() + "-" + (date.getMonth() + 1),
+                day : date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(),
+                minute : date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +
+                date.getHours() + ":" + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
+            };
+        });
+
         res.render('index', {
             title: '主页',
-            user: req.session.user
+            user: req.session.user,
+            items: result
         });
     });
 };

@@ -1,3 +1,30 @@
 <%- include header.ejs %>
-
+<% items.forEach(function (item, index) { %>
+    <p><h2><a href="/u/<%= item.userName %>/<%= item.time.day %>/<%= item.title %>"><%= item.title %></a></h2>
+    <a href="/u/<%= item.userName %>"><img src="<%= item.avatar %>" class="r_head" /></a></p>
+    <p class="info">
+        作者：<a href="/u/<%= item.userName %>"><%= item.userName %></a> |
+        日期：<%= item.time.minute %> |
+        标签：
+        <% item.tags.forEach(function (tag) { %>
+        <% if (tag) { %>
+        <a class="tag" href="/tags/<%= tag %>"><%= tag %></a>
+        <% } %>
+        <% }) %>
+        <% if (item.reprint_info && item.reprint_info.reprint_from) { %>
+        <br><a href="/u/<%= item.reprint_info.reprint_from.name %>/<%= item.reprint_info.reprint_from.day %>/<%= item.reprint_info.reprint_from.title %>">原文链接</a>
+        <% } %>
+    </p>
+    <p><%- item.content %></p>
+    <p class="info">
+        阅读：<%= item.pv %> |
+        评论：<%= item.comments.length %> |
+        转载：
+        <% if (item.reprint_info && item.reprint_info.reprint_to) { %>
+        <%= item.reprint_info.reprint_to.length %>
+        <% } else { %>
+        <%= 0 %>
+        <% } %>
+    </p>
+<% }) %>
 <%- include footer.ejs %>
