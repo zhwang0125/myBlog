@@ -13,6 +13,20 @@ var articleSchema = new Schema({
     content: String,                            // 内容
     comments: Array,                            // 评论留言
     pv: {type: Number, default: 0},
+
+    reprint_info: {                             // 转载和原文相关信息
+        reprint_from: {
+            name: String,
+            create_at: Date,
+            title: String
+        },
+        reprint_to: [{
+            name: String,
+            create_at: Date,
+            title: String
+        }]
+    },
+
     create_at: {type: Date, default: Date.now()}
 });
 
